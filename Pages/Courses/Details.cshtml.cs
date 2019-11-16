@@ -27,6 +27,8 @@ namespace ContosoUniversity.Pages.Courses
             Course = await _context.Courses
                  .AsNoTracking()
                  .Include(c => c.Department)
+                 .Include(e => e.Enrollments)
+                 .ThenInclude(s => s.Student)
                  .FirstOrDefaultAsync(m => m.CourseID == id);
 
             if (Course == null)
